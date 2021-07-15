@@ -4,7 +4,8 @@ fetch("http://localhost:3000/api/teddies")
     return response.json()
     }
   })
-  .then(function (listOfProducts) {     
+  .then(function (listOfProducts) {  
+    console.log (listOfProducts);  
     class article {
       constructor(id,colors, name, imageUrl, description, price){
         this.id = id;
@@ -16,14 +17,13 @@ fetch("http://localhost:3000/api/teddies")
       }
     }
     
-    for (let articles of listOfProducts) {
-      let product = new article (articles)
-      document.querySelector(".card").innerHTML += ` <div class="card">
-                                                        <img class="card-img-top" src="${article.imageUrl}" alt="teddies" title=""/>
-                                                        <div class="card-body">
-                                                          <h2 class="card-title">${article.name}</h2>
-                                                          <div class="card-text description">${article.description}</div>
-                                                          <div class="card-text price">${article.price}</div>
-                                                        </div>`;
+    for (let article of listOfProducts) {
+      // let product = new article (articles) 
+      document.querySelector(".card").innerHTML += `<img class="card-img-top" src="${article.imageUrl}" alt="teddies" title=""/>
+                                                    <div class="card-body">
+                                                      <h2 class="card-title">${article.name}</h2>
+                                                      <div class="card-text description">${article.description}</div>
+                                                      <div class="card-text price">${article.price}</div>
+                                                    </div>`;
   }})
   .catch(console.error);
