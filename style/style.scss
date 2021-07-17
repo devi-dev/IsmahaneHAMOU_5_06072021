@@ -1,0 +1,33 @@
+@import "_variables";
+.bgprimary {
+  background-color: $primarycolor;
+}
+.bgsecondary {
+  background-color: lighten($secondarycolor, 26%);
+}
+.navbar {
+  color: $terciaryclor;
+}
+a {
+  color: $terciaryclor !important;
+}
+
+.card {
+  overflow: hidden;
+  border: radius 1rem;
+  margin: 20px;
+  background-color: $primarycolor;
+  max-width: 300px;
+}
+.card-img-top {
+  max-height: 320px;
+}
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: lighten($secondarycolor, 26%);
+}
+.card-title {
+  font-size: 1.5rem;
+}

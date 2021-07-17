@@ -19,12 +19,16 @@ fetch("http://localhost:3000/api/teddies")
     
     for (let article of listOfProducts) {
       // let product = new article (articles) 
-      document.querySelector(".carte").innerHTML += `<img class="carte-img-top" src="${article.imageUrl}" alt="teddies" title=""/>
-                                                    <div class="carte-body">
-                                                      <h2 class="carte-title">${article.name}</h2>
-                                                      <div class="carte-text description">${article.description}</div>
-                                                      <div class="carte-text price">${article.price}</div>
-                                                    </div>`;
+      document.querySelector(".container").innerHTML +=`<div class="card bgprimary">
+                                                          <img class="card-img-top" src="${article.imageUrl}" alt="teddies" title=""/>
+                                                          <div class="card-header bgsecondary">
+                                                            <h2 class="card-title">${article.name}</h2>
+                                                            <div class="card-text price">${article.price/ 100}.00 €</div>
+                                                          </div>
+                                                          <div class="card-body">
+                                                            <div class="card-text description">${article.description}</div>
+                                                          </div>
+                                                        </div>`   
 
     }})
   .catch(console.error);

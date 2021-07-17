@@ -1,0 +1,38 @@
+.bgprimary {
+  background-color: #f3e9f1;
+}
+
+.bgsecondary {
+  background-color: #e9dfff;
+}
+
+.navbar {
+  color: #e68a08;
+}
+
+.container {
+  display: flex !important;
+}
+
+.card {
+  overflow: hidden;
+  border: radius 1rem;
+  margin: 20px;
+  background-color: #f3e9f1;
+  max-width: 500px;
+}
+
+.card-img-top {
+  max-height: 320px;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #e9dfff;
+}
+
+.card-title {
+  font-size: 1.5rem;
+}/*# sourceMappingURL=style.css.map */
