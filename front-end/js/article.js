@@ -6,3 +6,4 @@ fetch("http://localhost:3000/api/teddies/_id}")
   })
   .then(function (Product) {  
     console.log (Product); 
+    })
