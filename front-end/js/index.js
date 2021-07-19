@@ -19,7 +19,7 @@ fetch("http://localhost:3000/api/teddies")
     
     for (let article of listOfProducts) {
       // let product = new article (articles) 
-      document.querySelector(".container").innerHTML +=`<a href= article.html
+      document.querySelector(".container").innerHTML +=`<a href=https://devi-dev.github.io/IsmahaneHAMOU_5_06072021/article.html?id=${article.id}>
                                                           <div class="card bgprimary">
                                                             <img class="card-img-top" src="${article.imageUrl}" alt="teddies" title=""/>
                                                             <div class="card-header bgsecondary">
@@ -33,5 +33,4 @@ fetch("http://localhost:3000/api/teddies")
                                                         </a>`   
 
     }})
-    let setarticleurl = (new url(? ${article.id},article.html)).href
   .catch(console.error);
