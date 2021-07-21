@@ -6,31 +6,55 @@
   background-color: #e9dfff;
 }
 
-.navbar {
-  color: #e68a08;
+.terciarycolor {
+  color: #e68a08 !important;
+  font-weight: bold;
+  font-size: 1.3rem;
 }
 
-.container {
-  display: flex !important;
+h1 {
+  font-size: 2.2rem;
 }
 
 .card {
   overflow: hidden;
   border: radius 1rem;
   margin: 20px;
-  background-color: #f3e9f1;
   max-width: 500px;
+  background-color: #f3e9f1;
 }
 
 .card-img-top {
   max-height: 320px;
+  position: relative;
+  z-index: 0;
+}
+
+.far,
+.fas {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  box-sizing: border-box;
+}
+
+.far {
+  opacity: 1;
+}
+.far:active {
+  opacity: 0;
+}
+.far:active > .fas {
+  color: #e68a08;
 }
 
 .card-header {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
   background-color: #e9dfff;
+  padding: 0.75rem 0.75rem;
 }
 
 .card-title {
