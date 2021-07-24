@@ -30,7 +30,5 @@ fetch("http://localhost:3000/api/teddies")
     }})
 
   .catch(console.error);
-   
 
-  console.log(articles._id);
 
