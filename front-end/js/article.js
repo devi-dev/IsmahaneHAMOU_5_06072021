@@ -12,6 +12,7 @@ fetch(`http://localhost:3000/api/teddies/${getParameters}`)
 
   .then(function (article) {  
        console.log (article);
+       
 
         document.querySelector(".container").innerHTML +=`<div class="card bgprimary article-card">
                                                             <img class="card-img-top article-img-top" src="${article.imageUrl}" alt="teddies" title=""/>
@@ -23,11 +24,7 @@ fetch(`http://localhost:3000/api/teddies/${getParameters}`)
                                                                 <label for="color-select">Choisissez la couleur de votre ours en peluche:</label>
                                                                 <select name="colors" id="colors-select">
                                                                     <option value="">--Veuillez sélectionner une couleur--</option>
-                                                                    <option value="colors">${article.colors[0]}</option>
-                                                                    <option value="colors">${article.colors[1]}</option>
-                                                                    <option value="colors">${article.colors[2]}</option>
-                                                                    <option value="colors">${article.colors[3]}</option>
-  
+                                                                    <option value="colors">${article.colors}</option>  
                                                                 </select></br>
                                                                 <select name="quantité" id="quantity-select">
                                                                     <option value="">--Quantité--</option>
@@ -51,3 +48,8 @@ fetch(`http://localhost:3000/api/teddies/${getParameters}`)
     })
 
   .catch(console.error);
+  /* 
+let colors =${article.colors};
+for (let i = 0; i < nombres.length; i++) {
+
+}
