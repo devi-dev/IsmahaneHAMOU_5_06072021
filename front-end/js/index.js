@@ -1,4 +1,3 @@
-const id=
 //fetch data and transform jsonfile in data for js
 fetch("http://localhost:3000/api/teddies")
 
@@ -12,7 +11,7 @@ fetch("http://localhost:3000/api/teddies")
     console.log (listOfProducts); 
     for (let article of listOfProducts) {
       document.querySelector(".listofarticles").innerHTML +=`<div class="card bgprimary">
-                                                              <a href=https://devi-dev.github.io/IsmahaneHAMOU_5_06072021/article.html?${article._id}">
+                                                              <a href=https://devi-dev.github.io/IsmahaneHAMOU_5_06072021/article.html?${article._id}>
                                                                 <img class="card-img-top" src="${article.imageUrl}" alt="teddies" title=""/>
                                                                   <div>
                                                                     <i class="far fa-heart fa-2x"></i>
