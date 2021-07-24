@@ -1,25 +1,18 @@
+const id=
+//fetch data and transform jsonfile in data for js
 fetch("http://localhost:3000/api/teddies")
+
   .then(function(response){
     if (response.ok){
     return response.json()
     }
   })
-  .then(function (listOfProducts) {  
-    console.log (listOfProducts);  
-    class articles {
-      constructor(_id, colors, name, imageUrl, description, price){
-        this._id = _id;
-        this.colors = colors;
-        this.name = name;
-        this.imageUrl = imageUrl;
-        this.description = description;
-        this.price = price;
-      }
-    }
 
+  .then(function (listOfProducts) {  
+    console.log (listOfProducts); 
     for (let article of listOfProducts) {
       document.querySelector(".listofarticles").innerHTML +=`<div class="card bgprimary">
-                                                              <a href=https://devi-dev.github.io/IsmahaneHAMOU_5_06072021/article.html?_id=${article._id} onclick="getParameters(this); return false">
+                                                              <a href=https://devi-dev.github.io/IsmahaneHAMOU_5_06072021/article.html?${article._id}">
                                                                 <img class="card-img-top" src="${article.imageUrl}" alt="teddies" title=""/>
                                                                   <div>
                                                                     <i class="far fa-heart fa-2x"></i>
@@ -34,6 +27,10 @@ fetch("http://localhost:3000/api/teddies")
                                                                 </div>
                                                               </a>
                                                             </div>`   
-
     }})
+
   .catch(console.error);
+   
+
+  console.log(articles._id);
+
