@@ -12,22 +12,23 @@ fetch(`http://localhost:3000/api/teddies/${getParameters}`)
 
   .then(function (article) {  
        console.log (article);
+       //document.querySelector(".container").innerHTML 
        
-        document.querySelector(".container").innerHTML +=`<div class="card bgprimary article-card">
-                                                            <img class="card-img-top article-img-top" src="${article.imageUrl}" alt="teddies" title=""/>
-                                                            <div class="card-header bgsecondary article-card-header ">
+        let html = `<div class="card bgprimary article-card">
+                      <img class="card-img-top article-img-top" src="${article.imageUrl}" alt="teddies" title=""/>
+                          <div class="card-header bgsecondary article-card-header ">
                                                                 <h2 class="card-title">${article.name}</h2>
                                                                 <div class="card-text price">${article.price/ 100}.00 €</div>
                                                             </div>
                                                             <div class="card-body">
                                                                 <label for="color-select">Choisissez la couleur de votre ours en peluche:</label>
                                                                 <select name="colors" id="colors-select">
-                                                                    <option value="">--Veuillez sélectionner une couleur--</option>
-                                                                    <option value="colors">${article.colors[0]}</option>
-                                                                    <option value="colors">${article.colors[1]}</option>
-                                                                    <option value="colors">${article.colors[2]}</option>
-                                                                    <option value="colors">${article.colors[3]}</option>
-                                                                </select> </br>
+                                                                    <option value="">--Veuillez sélectionner une couleur--</option>`;
+                                                                    for (let color of article.colors){
+                                                                    html+=`<option value="colors">${color}</option>`;
+                                                                    }
+                                                                                                                                       
+                                                                html+=`</select> </br>
                                                                 <select name="quantité" id="quantity-select">
                                                                     <option value="">--Quantité--</option>
                                                                     <option value="qty">1</option>
@@ -41,13 +42,11 @@ fetch(`http://localhost:3000/api/teddies/${getParameters}`)
                                                                 <button class="add to cart">Ajouter au Panier</button>
                                                                 
                                                             </div>
-                                                         </div>`
+                                                         </div>`;
+                                                         document.querySelector(".container").innerHTML +=html;
    
   })
   .catch(console.error);
-  /*
-  const colors = article.colors
-      for (let color of colors { 
-      let newNode = document.createElement ("div"). innerhtml+= `<label for="color-select">Choisissez la couleur de votre choix:</label>
-                              <select name="color" class="color-select">${color[i]}</Select><br/>`
-      }*/
+  
+  let articleLocaleStorage = JSON.parse(localStorage.getItem("article"));
+  console.log(articleLocaleStorage);
