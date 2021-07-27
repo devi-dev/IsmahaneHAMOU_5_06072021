@@ -22,31 +22,43 @@ fetch(`http://localhost:3000/api/teddies/${getParameters}`)
                                                             </div>
                                                             <div class="card-body">
                                                                 <label for="color-select">Choisissez la couleur de votre ours en peluche:</label>
-                                                                <select name="colors" id="colors-select">
+                                                                <select name="colors" id="colors-selection" onchange="showcolor()">
                                                                     <option value="">--Veuillez sélectionner une couleur--</option>`;
+                                                                    
                                                                     for (let color of article.colors){
-                                                                    html+=`<option value="colors">${color}</option>`;
+                                                                    html+=`<option value=${color} id="colors">${color}</option>`;
                                                                     }
                                                                                                                                        
                                                                 html+=`</select> </br>
-                                                                <select name="quantité" id="quantity-select">
-                                                                    <option value="">--Quantité--</option>
+                                                                <select name="quantity" id="quantity-selection" onchange="showquantity()>
+                                                                    <option value="label">--Quantité--</option>
                                                                     <option value="qty">1</option>
                                                                     <option value="qty">2</option>
                                                                     <option value="qty">3</option>
                                                                     <option value="qty">4</option>
                                                                     <option value="qty">5</option>
                                                                 </select>
+
                                                                 </br></br>
-                                                                <div class="card-text description" type="submit">${article.description}</div>
-                                                                <button class="add to cart">Ajouter au Panier</button>
-                                                                
-                                                            </div>
+                                                                <div class="card-text description">${article.description}</div>`
+                                                                 html+=`<button class ="add to cart" type="submit">Ajouter au Panier </button>`                                                              
+                                                            html+=`</div>
                                                          </div>`;
+                                                        
                                                          document.querySelector(".container").innerHTML +=html;
    
   })
   .catch(console.error);
-  
-  let articleLocaleStorage = JSON.parse(localStorage.getItem("article"));
-  console.log(articleLocaleStorage);
+
+  //collecter les élements selectionnés et les stocker dans locale.storage
+  function showcolor(){
+        let getColorSelected = document.querySelector("#colors-selection").value;
+        console.log(getColorSelected)
+        localStorage.setItem(colors,getColorSelected);
+         }
+
+    function showquantity(){
+        let getQuantitySelected = document.querySelector("#quantity-selection").value;
+        console.log(getQuantitySelected)
+        localStorage.setItem(qty,getQuantitySelected);
+         }
