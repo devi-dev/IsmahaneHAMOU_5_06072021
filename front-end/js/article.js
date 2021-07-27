@@ -51,19 +51,13 @@ fetch(`http://localhost:3000/api/teddies/${getParameters}`)
   .catch(console.error);
 
   //collecter les élements selectionnés et les stocker dans locale.storage
-
-  localStorage.setItem("_id","article._id");
-  localStorage.setItem("name","article.name");
-  localStorage.setItem("description","article.description");
-  localStorage.setItem("price","article.price");
-  localStorage.setItem("colors","article.colors");
-  localStorage.setItem("quantity","article.quantity")
-
-
+  
+  
   function showcolor(){
         let getColorSelected = document.querySelector("#colors-selection").value;
         console.log(getColorSelected)
-        LocalStorage.getItem(colors)
+        localStorage.setItem("color", JSON.stringify(getColorSelected));
+        console.log(localStorage.getItem("color"));
          }
 
     function showquantity(){
