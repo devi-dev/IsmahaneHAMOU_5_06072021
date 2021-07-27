@@ -32,16 +32,16 @@ fetch(`http://localhost:3000/api/teddies/${getParameters}`)
                                                                 html+=`</select> </br>
                                                                 <select name="quantity" id="quantity-selection" onchange="showquantity()>
                                                                     <option value="label">--Quantité--</option>
-                                                                    <option value="qty">1</option>
-                                                                    <option value="qty">2</option>
-                                                                    <option value="qty">3</option>
-                                                                    <option value="qty">4</option>
-                                                                    <option value="qty">5</option>
+                                                                    <option value="1">1</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="5">5</option>
                                                                 </select>
 
                                                                 </br></br>
                                                                 <div class="card-text description">${article.description}</div>`
-                                                                 html+=`<button class ="add to cart" type="submit">Ajouter au Panier </button>`                                                              
+                                                                 html+=`<button onclick="setData()" class ="add-cart" type="submit">Ajouter au Panier </button>`                                                              
                                                             html+=`</div>
                                                          </div>`;
                                                         
@@ -51,14 +51,23 @@ fetch(`http://localhost:3000/api/teddies/${getParameters}`)
   .catch(console.error);
 
   //collecter les élements selectionnés et les stocker dans locale.storage
+
+  localStorage.setItem("_id","article._id");
+  localStorage.setItem("name","article.name");
+  localStorage.setItem("description","article.description");
+  localStorage.setItem("price","article.price");
+  localStorage.setItem("colors","article.colors");
+  localStorage.setItem("quantity","article.quantity")
+
+
   function showcolor(){
         let getColorSelected = document.querySelector("#colors-selection").value;
         console.log(getColorSelected)
-        localStorage.setItem(colors,getColorSelected);
+        LocalStorage.getItem(colors)
          }
 
     function showquantity(){
         let getQuantitySelected = document.querySelector("#quantity-selection").value;
         console.log(getQuantitySelected)
-        localStorage.setItem(qty,getQuantitySelected);
-         }
+        localStorage.setItem(quantity,getQuantitySelected);
+        }
