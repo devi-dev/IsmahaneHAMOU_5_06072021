@@ -40,6 +40,8 @@
                                                               <input id="number" class="form-control" required />
                                                             </div>
                                                             <button class="bloc-button btn btn-lg btn-block btn-order" type="submit">
-                                                              Commander
+                                                              <a href="orderconfirmation.html">
+                                                                Commander 
+                                                              </a>
                                                             </button>
                                                           </form>`
