@@ -1,4 +1,4 @@
- class articles {
+ class Articles {
       constructor(_id, colors, name, imageUrl, description, price){
         this._id = _id;
         this.colors = colors;

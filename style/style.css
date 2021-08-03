@@ -1,3 +1,4 @@
+/*mise en forme Accueil*/
 .bgprimary {
   background-color: #f3e9f1;
 }
@@ -16,6 +17,12 @@ h1 {
   font-size: 2.2rem;
 }
 
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color: black;
+}
+
 .card {
   overflow: hidden;
   border: radius 1rem;
@@ -30,25 +37,6 @@ h1 {
   z-index: 0;
 }
 
-.far,
-.fas {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  box-sizing: border-box;
-}
-
-.far {
-  opacity: 1;
-}
-.far:active {
-  opacity: 0;
-}
-.far:active > .fas {
-  color: #e68a08;
-}
-
 .card-header {
   display: flex;
   align-items: baseline;
@@ -59,4 +47,38 @@ h1 {
 
 .card-title {
   font-size: 1.5rem;
-}/*# sourceMappingURL=style.css.map */
+}
+
+/*mise en forme Page article*/
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+}
+
+.popup {
+  margin: 20% auto;
+  text-align: center;
+  padding: 0 0 20px;
+  background-color: #f3e9f1;
+  width: 70%;
+  border-radius: 10px;
+  box-shadow: 8px 12px 0 rgba(189, 134, 178, 0.5);
+}
+
+p.btn-close {
+  text-align: right;
+  vertical-align: top;
+  cursor: pointer;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 10px;
+  margin: 0;
+  color: red;
+}
+
+/*mise en forme Page panier*//*# sourceMappingURL=style.css.map */

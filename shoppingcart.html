@@ -7,13 +7,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
-    <title>Orinoco, site d'e-commerce</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
-      crossorigin="anonymous"
-    />
+    <title>Orinoco, site d'e-commerce - article</title>
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -35,33 +29,30 @@
         </a>
         <div class="navbarContent">
           <ul class="navbar-nav inline-item">
-            <li class="nav-item list-inline-item">
-              <a
-                class="nav-link strong terciarycolor bold"
-                href="shoppingcart.html"
-                >Panier</a
-              >
+            <li class="nav-item">
+              <a class="nav-link strong terciarycolor bold" href="index.html">
+                Acceuil
+              </a>
             </li>
           </ul>
         </div>
       </nav>
       <div class="jumbotron text-center">
-        <h1>
-          Orinoco,<br />
-          Découvrez nos ours en peluche!
-        </h1>
+        <h1 class="carttitle">Consultez votre panier</h1>
       </div>
     </header>
+
     <section
       class="
-        container
-        listofarticles
+        container-panier
+        articlecard
         col-12
         d-flex
         flex-wrap
         justify-content-center
       "
     ></section>
+
     <footer class="navbar bgsecondary">
       <a class="navbar-brand" href="index.html">
         <img
@@ -76,7 +67,11 @@
       </a>
     </footer>
     <script type="text/javascript" src="./front-end/js/class.js" async></script>
-    <script type="text/javascript" src="./front-end/js/index.js"></script>
+    <script
+      type="text/javascript"
+      src="./front-end/js/shoppingcart.js"
+    ></script>
+
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script
       src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
