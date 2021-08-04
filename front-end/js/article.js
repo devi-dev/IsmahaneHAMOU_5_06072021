@@ -13,7 +13,6 @@ fetch(`http://localhost:3000/api/teddies/${getParameters}`)
   .then(function (article) {  
        console.log (article);
        this.selectedArticle = article;
-       //document.querySelector(".container").innerHTML 
        
         let html = `<div class="card bgprimary article-card">
                       <img class="card-img-top article-img-top" src="${article.imageUrl}" alt="teddies" title=""/>
@@ -31,7 +30,7 @@ fetch(`http://localhost:3000/api/teddies/${getParameters}`)
                                                                                                                                        
                                                          html+=`</select></br></br>
                                                                 <label for="quantity">Quantité souhaitée:</label><br/>
-                                                                <select name="quantity" id="quantity-selection" onchange="showquantity()>
+                                                                <select name="quantity" id="quantity-selection" onchange="showquantity()">
                                                                     <option value="label">--Quantité--</option>
                                                                     <option value="1">1</option>
                                                                     <option value="2">2</option>
@@ -61,18 +60,8 @@ fetch(`http://localhost:3000/api/teddies/${getParameters}`)
   .catch(console.error);
 
   //afficher la pop-up lorsque l'utilisateur clique sur le panier
- let cartButton = document.querySelector("#add-cart")
- let overlay = document.querySelector("#overlay")
- let closePopupButton = document.querySelector("#btn-close-popup")
+ 
 
-cartButton.addEventListener("click", openPopup);
-function openPopup(){
-  overlay.style.display = "block";
-}
-closePopupButton.addEventListener("click", closePopup);
-function closePopup(){
-  overlay.style.display = "none";
-}
 
   //collecter les élements selectionnés et les stocker dans locale.storage
   
@@ -80,19 +69,35 @@ function closePopup(){
  function showcolor(){
         let getColorSelected = document.querySelector("#colors-selection").value;
         console.log(getColorSelected)
-        localStorage.setItem("color", JSON.stringify(getColorSelected));
-        console.log(localStorage.getItem("color"));
+        this.selectedArticle["selectedColor"]=getColorSelected;//
+        console.log(this.selectedArticle)
          }
 
          
     function showquantity(){
         let getQuantitySelected = document.querySelector("#quantity-selection").value;
         console.log(getQuantitySelected)
-        localStorage.setItem("quantity", JSON.stringify(getQuantitySelected));
-        console.log(localStorage.getItem("quantity"));
+        this.selectedArticle["selectedQuantity"]=getQuantitySelected;//
+        console.log(this.selectedArticle)
          }
+         
+    function closePopup(){
+      overlay.style.display = "none";
+    }
     
     function setData(){
+      let getArticle = JSON.parse(localStorage.getItem ("article"));
+      if (getArticle != null && getArticle != undefined){
+      getArticle.unshift(this.selectedArticle)
+      localStorage.setItem("article",JSON.stringify(getArticle));
+      }
+      else{
+        let panier = [];
+        panier.unshift(this.selectedArticle)
+        localStorage.setItem("article",JSON.stringify(panier));
+      }
         console.log(this.selectedArticle);
-        localStorage.setItem("article",JSON.stringify(this.selectedArticle));
+        let overlay = document.querySelector("#overlay")
+        overlay.style.display = "block";
+        document.querySelector("#btn-close-popup").addEventListener("click", closePopup);
     }
