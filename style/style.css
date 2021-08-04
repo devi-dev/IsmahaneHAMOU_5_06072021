@@ -70,7 +70,7 @@ a {
   box-shadow: 8px 12px 0 rgba(189, 134, 178, 0.5);
 }
 
-p.btn-close {
+p.btn-close-popup {
   text-align: right;
   vertical-align: top;
   cursor: pointer;
