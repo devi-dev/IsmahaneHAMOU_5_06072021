@@ -25,14 +25,14 @@ fetch(`http://localhost:3000/api/teddies/${getParameters}`)
                                                                 <select name="colors" id="colors-selection" required onchange="showcolor()">`;
                                                                     
                                                                     for (let color of article.colors){
-                                                                    html+=`<option value=${color} id="colors">${color}</option>`;
+                                                                    html+=`<option value=${color} required selected="selected" id="colors">${color}</option>`;
                                                                     }
                                                                                                                                        
                                                          html+=`</select></br></br>
                                                                 <label for="quantity">Quantité souhaitée:</label><br/>
                                                                 <select name="quantity" id="quantity-selection" onchange="showquantity()">
                                                                     <option value="label">--Quantité--</option>
-                                                                    <option value="1">1</option>
+                                                                    <option value="1" selected="selected">1</option>
                                                                     <option value="2">2</option>
                                                                     <option value="3">3</option>
                                                                     <option value="4">4</option>
@@ -65,22 +65,24 @@ fetch(`http://localhost:3000/api/teddies/${getParameters}`)
 
   //collecter les élements selectionnés et les stocker dans locale.storage
   
-  
+
  function showcolor(){
         let getColorSelected = document.querySelector("#colors-selection").value;
-        console.log(getColorSelected)
-        this.selectedArticle["selectedColor"]=getColorSelected;//
+         if(getColorSelected == null || getColorSelected == undefined){
+           getColorSelected = this.selectedArticle[1]
+          } else {
+        this.selectedArticle["selectedColor"]=getColorSelected;
         console.log(this.selectedArticle)
-         }
-
+         }}
+         
          
     function showquantity(){
         let getQuantitySelected = document.querySelector("#quantity-selection").value;
         console.log(getQuantitySelected)
-        this.selectedArticle["selectedQuantity"]=getQuantitySelected;//
+        this.selectedArticle["selectedQuantity"]=getQuantitySelected;
         console.log(this.selectedArticle)
          }
-         
+ 
     function closePopup(){
       overlay.style.display = "none";
     }

@@ -64,15 +64,65 @@ a {
   border-radius: 10px;
   box-shadow: 8px 12px 0 rgba(darken($primarycolor, 30%), 0.5);
 }
+.popup-title {
+  padding: 20px 0;
+}
 p.btn-close-popup {
-  text-align: right;
-  vertical-align: top;
+  text-align: center;
+  padding: 0 0 20px;
+  float: right;
   cursor: pointer;
   font-size: 1.5rem;
   font-weight: bold;
-  padding: 10px;
   margin: 0;
-  color: red;
+  background-color: red;
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  color: white;
 }
 
 /*mise en forme Page panier*/
+td {
+  display: flex;
+}
+.container-panier {
+  display: flex;
+  flex-flow: column;
+  align-content: center;
+}
+.card-panier {
+  width: 80%;
+  height: auto;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.productimage {
+  width: 100px;
+  height: auto;
+}
+
+form {
+  width: 80%;
+}
+
+input + span {
+  padding-right: 30px;
+}
+
+input:invalid + span:after {
+  position: absolute;
+  content: "✖";
+  padding-left: 5px;
+  color: #8b0000;
+}
+
+input:valid + span:after {
+  position: absolute;
+  content: "✓";
+  padding-left: 5px;
+  color: #009000;
+}
