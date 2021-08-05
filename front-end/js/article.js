@@ -25,7 +25,7 @@ fetch(`http://localhost:3000/api/teddies/${getParameters}`)
                                                                 <select name="colors" id="colors-selection" required onchange="showcolor()">`;
                                                                     
                                                                     for (let color of article.colors){
-                                                                    html+=`<option value=${color} required selected="selected" id="colors">${color}</option>`;
+                                                                    html+=`<option value=${color} required" id="colors">${color}</option>`;
                                                                     }
                                                                                                                                        
                                                          html+=`</select></br></br>
@@ -68,8 +68,9 @@ fetch(`http://localhost:3000/api/teddies/${getParameters}`)
 
  function showcolor(){
         let getColorSelected = document.querySelector("#colors-selection").value;
-         if(getColorSelected == null || getColorSelected == undefined){
-           getColorSelected = this.selectedArticle[1]
+        console.log(getColorSelected)
+         if(this.selectedArticle == null || getColorSelected == undefined){
+           return this.selectedArticle[0]
           } else {
         this.selectedArticle["selectedColor"]=getColorSelected;
         console.log(this.selectedArticle)
@@ -82,10 +83,6 @@ fetch(`http://localhost:3000/api/teddies/${getParameters}`)
         this.selectedArticle["selectedQuantity"]=getQuantitySelected;
         console.log(this.selectedArticle)
          }
- 
-    function closePopup(){
-      overlay.style.display = "none";
-    }
     
     function setData(){
       let getArticle = JSON.parse(localStorage.getItem ("article"));
@@ -102,4 +99,7 @@ fetch(`http://localhost:3000/api/teddies/${getParameters}`)
         let overlay = document.querySelector("#overlay")
         overlay.style.display = "block";
         document.querySelector("#btn-close-popup").addEventListener("click", closePopup);
+    }
+    function closePopup(){
+      overlay.style.display = "none";
     }

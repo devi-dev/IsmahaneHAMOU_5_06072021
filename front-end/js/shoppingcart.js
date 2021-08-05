@@ -1,19 +1,19 @@
-  document.querySelector(".container-panier").innerHTML+=`<table>
-                                                            <tr>
-                                                              <th>Référence de l'article</th>
-                                                              <th>Photo de l'article </th>
-                                                              <th>Nom de l'article</th>
-                                                              <th>Couleur selectionnée</th>
-                                                              <th>Quantité selectionnée</th>
-                                                              <th>Prix unitaire du produit</th>
-                                                              <th>Prix total</th>
-                                                            </tr>  
-                                                          </table>`
+  document.querySelector(".container-panier").innerHTML+=`<div class="card-panier">
+                                                              <div>Référence de l'article</div>
+                                                              <div>Photo de l'article </div>
+                                                              <div>Nom de l'article</div>
+                                                              <div>Couleur </div>
+                                                              <div>Quantité </div>
+                                                              <div>Prix unitaire du produit</div>
+                                                              <div>Prix total</div>
+                                                          </div>`
     
     document.addEventListener("DOMContentLoaded", function(event) { 
         let getArticle = localStorage.getItem ("article")
 
         let objArticle = JSON.parse(getArticle)
+
+        
         
         for (let article of objArticle){ 
 
@@ -25,11 +25,11 @@
                                                                 <div class="productquantity">${article.selectedQuantity}</div>
                                                                 <div class="productprice">${article.price/100}.00€</div>
                                                                 <div class="totalprice">
-                                                                  ${Number(article.price)}*${Number(article.selectedQuantity)}
+                                                                  ${parseInt(article.price)/100*parseInt(article.selectedQuantity)}.00€
                                                                 </div>
                                                           </div>`
-
-                                    }
+                                                          }
+                                    
                                                                   
   document.querySelector(".container-panier").innerHTML+=`<form id="order-form">
                                                             <div class="form-group">
