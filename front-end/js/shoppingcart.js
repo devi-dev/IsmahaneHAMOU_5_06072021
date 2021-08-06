@@ -27,9 +27,31 @@
                                                                 <div class="totalprice">
                                                                   ${parseInt(article.price)/100*parseInt(article.selectedQuantity)}.00€
                                                                 </div>
-                                                          </div>`
-                                                          }
-                                    
+                                                                <button type="reset" id="remove-btn" class="alert-danger btn">
+                                                                Supprimer
+                                                                </button>
+                                                          </div>` 
+  function removeArticle(){
+   localStorage.removeItem('article');
+  }
+  document.querySelector("#remove-btn").addEventListener("click", removeArticle);  
+        }
+/*
+let totalPricePerProduct= "";
+let cartLenght= "";
+let CartTotalPrice="";                                                   
+function getTotalCartPrice(){
+totalPricePerProduct= parseInt(article.price)/100*parseInt(article.selectedQuantity)
+cartLenght= totalPricePerProduct.lenght
+for (let i=0;i<cartLenght;i++){
+CartTotalPrice = totalPricePerProduct++;
+}}
+document.querySelector(".container-panier").innerHTML+=`<div class="total-order-price article-information bgprimary">${CartTotalPrice}</div>`
+*/
+
+ 
+
+           
                                                                   
   document.querySelector(".container-panier").innerHTML+=`<form id="order-form">
                                                             <div class="form-group">
@@ -58,4 +80,4 @@
                                                               </a>
                                                             </button>
                                                           </form>`
-                                                          });
+                                                          })

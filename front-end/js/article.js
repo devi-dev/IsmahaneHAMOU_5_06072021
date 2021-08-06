@@ -69,7 +69,7 @@ fetch(`http://localhost:3000/api/teddies/${getParameters}`)
  function showcolor(){
         let getColorSelected = document.querySelector("#colors-selection").value;
         console.log(getColorSelected)
-         if(this.selectedArticle == null || getColorSelected == undefined){
+         if(getColorSelected == null || getColorSelected == undefined){
            return this.selectedArticle[0]
           } else {
         this.selectedArticle["selectedColor"]=getColorSelected;
@@ -80,9 +80,12 @@ fetch(`http://localhost:3000/api/teddies/${getParameters}`)
     function showquantity(){
         let getQuantitySelected = document.querySelector("#quantity-selection").value;
         console.log(getQuantitySelected)
+        if(getQuantitySelected == null || getQuantitySelected == undefined){
+           return getQuantitySelected = 1
+        } else {  
         this.selectedArticle["selectedQuantity"]=getQuantitySelected;
         console.log(this.selectedArticle)
-         }
+         }}
     
     function setData(){
       let getArticle = JSON.parse(localStorage.getItem ("article"));
