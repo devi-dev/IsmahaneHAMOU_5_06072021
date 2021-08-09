@@ -7,7 +7,7 @@
   background-color: lighten($secondarycolor, 26%);
 }
 .terciarycolor {
-  color: $terciarycolor !important;
+  color: darken($terciarycolor, 15%) !important;
   font-weight: bold;
   font-size: 1.3rem;
 }
@@ -30,13 +30,22 @@ a {
   text-decoration: none;
   cursor: pointer;
   color: black;
+  &:hover {
+    text-decoration: none;
+  }
 }
 .card {
   overflow: hidden;
-  border: radius 1rem;
+  border-radius: 1rem;
   margin: 20px;
   max-width: 500px;
   background-color: $primarycolor;
+  transform: scale(1);
+  &:hover {
+    transform: scale(1.05);
+    transition: ease-in-out 100ms;
+    box-shadow: rgba(darken($secondarycolor, 25%), 0.35) 0px 5px 15px;
+  }
 }
 .card-img-top {
   max-height: 320px;
@@ -94,9 +103,7 @@ p.btn-close-popup {
 }
 
 /*mise en forme Page panier*/
-td {
-  display: flex;
-}
+
 .container-panier {
   display: flex;
   flex-flow: column;
@@ -116,7 +123,7 @@ td {
 }
 
 form {
-  width: 80%;
+  width: 90%;
 }
 
 input + span {

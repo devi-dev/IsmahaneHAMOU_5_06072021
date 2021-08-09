@@ -85,7 +85,7 @@ document.querySelector("#order-form").innerHTML+=`<div class="form-group">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="codepostal"> Code postal </label>
-                                                                <input id="codepostal" name="codepostal" class="form-control" type="number" placeholder="75003" required pattern="[0-9]{5}"/>
+                                                                <input id="codepostal" name="codepostal" class="form-control" placeholder="75003" required pattern="[0-9]{5}"/>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="ville"> Ville </label>
@@ -95,8 +95,8 @@ document.querySelector("#order-form").innerHTML+=`<div class="form-group">
                                                                 <label for="telNo"> Numéro de téléphone </label>
                                                                 <input id="telNo" name="telNo" class="form-control" type="tel" placeholder="06 24 45 67 89" required pattern="[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" />
                                                             </div>
-                                                             <button class="bloc-button btn btn-lg btn-block btn-order" type="submit">
+                                                             <input class="bloc-button btn btn-lg btn-block btn-order" type="submit">
                                                                 <a href="orderconfirmation.html">
                                                                   Commander 
                                                                 </a>
-                                                            </button>`;
+                                                            </input>`;
