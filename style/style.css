@@ -14,8 +14,21 @@
   font-size: 1.3rem;
 }
 
+.jumbotron {
+  background: url("../front-end/images/banner.jpg") no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  padding: 2.2rem 0.5rem;
+}
+
 h1 {
   font-size: 2.2rem;
+  font-weight: bold;
+  background: rgba(142, 90, 255, 0.95);
+  color: white;
+  padding: 1rem 0;
+  border-radius: 30px;
+  width: 80%;
 }
 
 a {
@@ -102,8 +115,7 @@ td {
 }
 
 .card-panier {
-  width: 80%;
-  height: auto;
+  width: 90%;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
