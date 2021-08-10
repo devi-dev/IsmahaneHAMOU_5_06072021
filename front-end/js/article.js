@@ -65,7 +65,7 @@ fetch(`http://localhost:3000/api/teddies/${getParameters}`)
   
   //collect selected items and stock them in the locale.storage
   
- function showcolor(){
+  function showcolor(){
         let getColorSelected = document.querySelector("#colors-selection").value; //get color selected value
         console.log(getColorSelected)
          if(getColorSelected == null || getColorSelected == undefined){ //set default value if user didn't choose the color
@@ -76,7 +76,8 @@ fetch(`http://localhost:3000/api/teddies/${getParameters}`)
          }}
          
          
-    function showquantity(){
+    
+  function showquantity(){
         let getQuantitySelected = document.querySelector("#quantity-selection").value;
         console.log(getQuantitySelected)
         if(getQuantitySelected == null || getQuantitySelected == undefined){

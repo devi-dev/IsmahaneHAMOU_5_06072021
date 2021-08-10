@@ -125,21 +125,11 @@ p.btn-close-popup {
 form {
   width: 90%;
 }
-
-input + span {
-  padding-right: 30px;
+.form-group {
+  margin-bottom: 10px;
+  position: relative;
+  display: flex;
 }
-
-input:invalid + span:after {
-  position: absolute;
-  content: "✖";
-  padding-left: 5px;
-  color: #8b0000;
-}
-
-input:valid + span:after {
-  position: absolute;
-  content: "✓";
-  padding-left: 5px;
-  color: #009000;
+label {
+  width: 30%;
 }

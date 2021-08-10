@@ -66,37 +66,70 @@
     
   console.log(objArticle[i])
 }
+//verification des saisies de l'utilisateur dans le formulaire
+let myForm = document.getElementById("orderform");
+let myRegExp= new RegExp('^[a-zA-Z]+$','g');//les regexp ou expression régulière permettent de rechercher la présence de caractères dans une expression. ^:debut du texte,+:répetion du caractère plusieurs fois, {2,30}:nombre de caractères permis de 2 à 30 $:fin d'expression régulière,'g':marqueur globale \s:espage
+let myRegExpmail= new RegExp('^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$','g');
+let myRegExphone= new RegExp("(0|\\+33|0033)[1-9][0-9]{8}",'g');
+let myRegExpcp= new RegExp('^[0-9.-]{5}$','g');
+let familyName = document.getElementById("familyname");
+let surName = document.getElementById('surname');
+let email = document.getElementById('email');
+let adress = document.getElementById('adress');
+let codePostal = document.getElementById('codepostal');
+let ville = document.getElementById('ville');
+let telephone = document.getElementById('telNo');
+let spanContent = document.querySelectorAll(".span-form");
 
-document.querySelector("#order-form").innerHTML+=`<div class="form-group">
-                                                                <label for="name"> Nom </label>
-                                                                <input id="name" name="name" class="form-control" type="text" required placeholder="Ourson"/>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="surname"> Prénom </label>
-                                                                <input id="surname" name="surname" class="form-control" type="text" required placeholder="Teddy"/>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="email"> Adresse email </label>
-                                                                <input id="email" name="email" class="form-control" type="email" required placeholder="teddy.ourson@gmail.com"/>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="adress"> Adresse </label>
-                                                                <input id="adress" name="adress" class="form-control" placeholder="Rue aux Ours" type="text" required />
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="codepostal"> Code postal </label>
-                                                                <input id="codepostal" name="codepostal" class="form-control" placeholder="75003" required pattern="[0-9]{5}"/>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="ville"> Ville </label>
-                                                                <input id="ville" name="ville" class="form-control" placeholder="Paris" type="text" required />
-                                                            </div>                
-                                                            <div class="form-group">
-                                                                <label for="telNo"> Numéro de téléphone </label>
-                                                                <input id="telNo" name="telNo" class="form-control" type="tel" placeholder="06 24 45 67 89" required pattern="[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" />
-                                                            </div>
-                                                             <input class="bloc-button btn btn-lg btn-block btn-order" type="submit">
-                                                                <a href="orderconfirmation.html">
-                                                                  Commander 
-                                                                </a>
-                                                            </input>`;
+
+myForm.addEventListener('submit',function(e){
+  if (familyname.value.trim==""||myRegExp.test(familyname.value) == false) { //trim permet d'enlever les espaces avant et après la valeur
+  spanContent.innerHTML="saisie invalide";
+  spanContent.style.color="red";
+  e.preventDefault();//arrêt soumission
+  }
+  if (surName.value.trim==""||myRegExp.test(surName.value) == false) { //trim permet d'enlever les espaces avant et après la valeur
+  spanContent.innerHTML="saisie invalide";
+  spanContent.style.color="red";
+  e.preventDefault();//arrêt soumission
+  }
+   if (email.value.trim==""||myRegExpmail.test(email.value) == false) { //trim permet d'enlever les espaces avant et après la valeur
+    spanContent.innerHTML="saisie invalide";
+    spanContent.style.color="red";
+    e.preventDefault();//arrêt soumission
+  }
+    if (adress.value.trim==""||myRegExp.test(adress.value) == false) { //trim permet d'enlever les espaces avant et après la valeur
+    spanContent.innerHTML="saisie invalide";
+    spanContent.style.color="red";
+    e.preventDefault();//arrêt soumission
+    }
+    if (codePostal.value.trim==""||myRegExpcp.test(codePostal.value) == false) { //trim permet d'enlever les espaces avant et après la valeur
+    spanContent.innerHTML="saisie invalide";
+    spanContent.style.color="red";
+    e.preventDefault();//arrêt soumission
+    }
+    if (ville.value.trim==""||myRegExp.test(ville.value) == false) { //trim permet d'enlever les espaces avant et après la valeur
+    spanContent.innerHTML="saisie invalide";
+    spanContent.style.color="red";
+    e.preventDefault();//arrêt soumission
+    }
+    if (telephone.value.trim==""||myRegExphone.test(telephone.value) == false) { //trim permet d'enlever les espaces avant et après la valeur
+    spanContent.innerHTML="saisie invalide";
+    spanContent.style.color="red";
+    e.preventDefault();//arrêt soumission
+    }
+})
+// mettre le formulaire dans locale storage
+  let objformulaire = new Object();
+  objformulaire.familyname = familyname.value;
+  objformulaire.surname = surname.value;
+  objformulaire.email = email.value;
+  objformulaire.adress = email.value;
+  objformulaire.codepostal = codepostal.value;
+  objformulaire.ville = ville.value;
+  objformulaire.telephone = telNo.value;
+
+localStorage.setItem("formulaire",JSON.stringify(objformulaire));
+
+//envoyer le formulaire et le panier au serveur
+//
