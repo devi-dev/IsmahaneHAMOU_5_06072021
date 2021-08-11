@@ -68,68 +68,90 @@
 }
 //verification des saisies de l'utilisateur dans le formulaire
 let myForm = document.getElementById("orderform");
-let myRegExp= new RegExp('^[a-zA-Z]+$','g');//les regexp ou expression régulière permettent de rechercher la présence de caractères dans une expression. ^:debut du texte,+:répetion du caractère plusieurs fois, {2,30}:nombre de caractères permis de 2 à 30 $:fin d'expression régulière,'g':marqueur globale \s:espage
+
+let myRegExp= new RegExp('^[a-zA-Z-]+$','g');//les regexp ou expression régulière permettent de rechercher la présence de caractères dans une expression. ^:debut du texte,+:répetion du caractère plusieurs fois, {2,30}:nombre de caractères permis de 2 à 30 $:fin d'expression régulière,'g':marqueur globale \s:espage
 let myRegExpmail= new RegExp('^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$','g');
-let myRegExphone= new RegExp("(0|\\+33|0033)[1-9][0-9]{8}",'g');
-let myRegExpcp= new RegExp('^[0-9.-]{5}$','g');
+let myRegExpaddress= new RegExp('^[a-z0-9-]+$','g');//les regexp ou expression régulière permettent de rechercher la présence de caractères dans une expression. ^:debut du texte,+:répetion du caractère plusieurs fois, {2,30}:nombre de caractères permis de 2 à 30 $:fin d'expression régulière,'g':marqueur globale \s:espage
+let myRegExpcp= new RegExp('^[0-9]{5}$','g');
 let familyName = document.getElementById("familyname");
 let surName = document.getElementById('surname');
 let email = document.getElementById('email');
-let adress = document.getElementById('adress');
+let address = document.getElementById('address');
 let codePostal = document.getElementById('codepostal');
 let ville = document.getElementById('ville');
-let telephone = document.getElementById('telNo');
-let spanContent = document.querySelectorAll(".span-form");
+let errorText="Saisie invalide";
+console.log(email.value)
 
-
-myForm.addEventListener('submit',function(e){
-  if (familyname.value.trim==""||myRegExp.test(familyname.value) == false) { //trim permet d'enlever les espaces avant et après la valeur
-  spanContent.innerHTML="saisie invalide";
-  spanContent.style.color="red";
+myForm.addEventListener('click',function(e){
+  if (familyname.value.trim==""||myRegExp.test(familyName.value) == false) { //trim permet d'enlever les espaces avant et après la valeur
+  document.querySelector(".span-form-name").innerHTML=errorText;
   e.preventDefault();//arrêt soumission
   }
-  if (surName.value.trim==""||myRegExp.test(surName.value) == false) { //trim permet d'enlever les espaces avant et après la valeur
-  spanContent.innerHTML="saisie invalide";
-  spanContent.style.color="red";
+   if (familyname.value.trim==""||myRegExp.test(surName.value) == false) { //trim permet d'enlever les espaces avant et après la valeur
+  document.querySelector(".span-form-surname").innerHTML=errorText;
   e.preventDefault();//arrêt soumission
   }
    if (email.value.trim==""||myRegExpmail.test(email.value) == false) { //trim permet d'enlever les espaces avant et après la valeur
-    spanContent.innerHTML="saisie invalide";
-    spanContent.style.color="red";
+    document.querySelector(".span-form-email").innerHTML=errorText;
     e.preventDefault();//arrêt soumission
   }
-    if (adress.value.trim==""||myRegExp.test(adress.value) == false) { //trim permet d'enlever les espaces avant et après la valeur
-    spanContent.innerHTML="saisie invalide";
-    spanContent.style.color="red";
+    if (address.value.trim==""||myRegExpaddress.test(address.value) == false) { //trim permet d'enlever les espaces avant et après la valeur
+    document.querySelector(".span-form-address").innerHTML=errorText;
     e.preventDefault();//arrêt soumission
     }
     if (codePostal.value.trim==""||myRegExpcp.test(codePostal.value) == false) { //trim permet d'enlever les espaces avant et après la valeur
-    spanContent.innerHTML="saisie invalide";
-    spanContent.style.color="red";
+      document.querySelector(".span-form-cp").innerHTML=errorText;
+  
     e.preventDefault();//arrêt soumission
     }
     if (ville.value.trim==""||myRegExp.test(ville.value) == false) { //trim permet d'enlever les espaces avant et après la valeur
-    spanContent.innerHTML="saisie invalide";
-    spanContent.style.color="red";
+      document.querySelector(".span-form-ville").innerHTML=errorText;
+    
     e.preventDefault();//arrêt soumission
     }
-    if (telephone.value.trim==""||myRegExphone.test(telephone.value) == false) { //trim permet d'enlever les espaces avant et après la valeur
-    spanContent.innerHTML="saisie invalide";
-    spanContent.style.color="red";
-    e.preventDefault();//arrêt soumission
-    }
-})
+
 // mettre le formulaire dans locale storage
-  let objformulaire = new Object();
-  objformulaire.familyname = familyname.value;
-  objformulaire.surname = surname.value;
-  objformulaire.email = email.value;
-  objformulaire.adress = email.value;
-  objformulaire.codepostal = codepostal.value;
-  objformulaire.ville = ville.value;
-  objformulaire.telephone = telNo.value;
+  let contact = {
+  firstName: surname.value,
+  lastName: familyname.value,  
+  address: address.value,
+  city: ville.value,
+  email: email.value,
+  }
+  localStorage.setItem("formulaire",JSON.stringify(contact));
 
-localStorage.setItem("formulaire",JSON.stringify(objformulaire));
+  let articles = JSON.parse(localStorage.getItem("article"))
+  let products= [];
+  for (let p of articles){
+    products.push(p._id) 
+    }
+let dataToSend = {
+contact: contact,
+products: products
+}
 
-//envoyer le formulaire et le panier au serveur
-//
+function send(e) {
+  e.preventDefault();
+  fetch("http://localhost:3000/api/teddies/order", {
+    method: "POST",
+    headers: {
+      'Accept': 'application/json', 
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({dataToSend})
+  })
+  .then(function(res) {
+    if (res.ok) {
+      return res.json();
+    }
+  })
+  .then(function(dataToSend) {
+      document
+        .getElementById("result")
+        .innerText = dataToSend.postData.text;
+  });
+}
+
+document
+  .getElementById("orderform")
+  .addEventListener("submit", send);})

@@ -63,7 +63,7 @@
         Complétez le formulaire pour transmettre votre commande:
       </h2>
       <br />
-      <form id="orderform" method="POST" action="traitement.php">
+      <form id="orderform">
         <div class="form-group">
           <label for="familyname"> Nom </label>
           <input
@@ -74,7 +74,7 @@
             required
             placeholder="Ourson"
           />
-          <span class="span-form"></span>
+          <span class="span-form-name text-danger"></span>
         </div>
         <div class="form-group">
           <label for="surname"> Prénom </label>
@@ -86,7 +86,7 @@
             required
             placeholder="Teddy"
           />
-          <span class="span-form"></span>
+          <span class="span-form-surname text-danger"></span>
         </div>
         <div class="form-group">
           <label for="email"> Email </label>
@@ -98,19 +98,19 @@
             required
             placeholder="teddy.ourson@gmail.com"
           />
-          <span class="span-form"></span>
+          <span class="span-form-email text-danger"></span>
         </div>
         <div class="form-group">
-          <label for="adress"> Adresse </label>
+          <label for="address"> Adresse </label>
           <input
-            id="adress"
-            name="adress"
+            id="address"
+            name="address"
             class="form-control"
             placeholder="Rue aux Ours"
             type="text"
             required
           />
-          <span class="span-form"></span>
+          <span class="span-form-address text-danger"></span>
         </div>
         <div class="form-group">
           <label for="codepostal"> Code postal </label>
@@ -122,7 +122,7 @@
             required
             pattern="[0-9]{5}"
           />
-          <span class="span-form"></span>
+          <span class="span-form-cp text-danger"></span>
         </div>
         <div class="form-group">
           <label for="ville"> Ville </label>
@@ -134,25 +134,16 @@
             type="text"
             required
           />
-          <span class="span-form"></span>
-        </div>
-        <div class="form-group">
-          <label for="telNo"> Numéro de téléphone </label>
-          <input
-            id="telNo"
-            name="telNo"
-            class="form-control"
-            type="tel"
-            placeholder="06 24 45 67 89"
-            required
-            pattern="[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}"
-          /><span id="error" class="span-form"></span>
+          <span class="span-form-ville text-danger"></span>
         </div>
         <input
-          class="bloc-button action-btn btn btn-lg btn-block btn-order"
           type="submit"
+          id="btnOrder"
+          class="bloc-button action-btn btn btn-lg btn-block btn-order"
+          value="Commander"
         />
       </form>
+      <div id="result"></div>
     </section>
 
     <footer class="navbar bgprimary">
