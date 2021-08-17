@@ -112,18 +112,11 @@ p.btn-close-popup {
 }
 
 /*mise en forme Page panier*/
-.container-panier {
-  display: flex;
-  flex-flow: column;
-  align-content: center;
-}
-
 .card-panier {
-  width: 90%;
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
 }
 
 .productimage {
@@ -137,4 +130,14 @@ form {
 
 .form-group {
   margin-bottom: 10px;
+}
+
+.table {
+  width: 90%;
+}
+
+.table td {
+  padding: 0;
+  vertical-align: top;
+  border-top: none;
 }/*# sourceMappingURL=style.css.map */

@@ -14,6 +14,12 @@
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+    />
     <link type="text/css" rel="stylesheet" href="./style/style.css" />
   </head>
   <body>
@@ -46,20 +52,39 @@
 
     <section
       class="
+        table-responsive
         container-panier
         articlecard
+        d-flex
+        flex-wrap
+        justify-content-center
+        text-center
+      "
+    >
+      <table class="table table-sm">
+        <thead>
+          <tr class="card-panier row center bgsecondary">
+            <th class="cart-column center col column-title">Photo</th>
+            <th class="cart-column center col column-title">Prix</th>
+            <th class="cart-column center col column-title">Quantité</th>
+            <th class="cart-column center col column-title">Supprimer</th>
+          </tr>
+        </thead>
+      </table>
+    </section>
+    <br /><br />
+
+    <section
+      class="
+        container-form
         col-12
         d-flex
         flex-wrap
         justify-content-center
+        text-center
       "
-    ></section>
-    <br /><br />
-
-    <section class="container-panier col-12">
-      <h2
-        class="form-title d-flex flex-wrap justify-content-center text-center"
-      >
+    >
+      <h2 class="form-title text-center">
         Complétez le formulaire pour transmettre votre commande:
       </h2>
       <br />
@@ -160,10 +185,7 @@
       </a>
     </footer>
     <script type="text/javascript" src="./front-end/js/class.js" async></script>
-    <script
-      type="text/javascript"
-      src="./front-end/js/shoppingcart.js"
-    ></script>
+    <script type="text/javascript" src="./front-end/js/testcart.js"></script>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script
