@@ -104,7 +104,6 @@ p.btn-close-popup {
 
 /*mise en forme Page panier*/
 
-
 .card-panier {
   display: flex;
   flex-flow: row;
@@ -112,16 +111,14 @@ p.btn-close-popup {
   align-items: baseline;
 }
 
-.productimage {
-  width: 100px;
-  height: auto;
-}
-
 form {
   width: 90%;
 }
 .form-group {
   margin-bottom: 10px;
+}
+div.form-group {
+  text-align: left;
 }
 
 .table {
@@ -132,4 +129,17 @@ form {
   padding: 0;
   vertical-align: top;
   border-top: none;
+}
+.actionbtn {
+  background: linear-gradient($secondarycolor, $terciarycolor);
+  color: white;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 10px;
+  border: none;
+  box-shadow: 1px 3px 0 rgba(darken($primarycolor, 30%), 0.5);
+  &:hover {
+    box-shadow: 2px 5px 0 rgba(darken($primarycolor, 35%), 0.5);
+  }
 }

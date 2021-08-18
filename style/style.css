@@ -119,17 +119,16 @@ p.btn-close-popup {
   align-items: baseline;
 }
 
-.productimage {
-  width: 100px;
-  height: auto;
-}
-
 form {
   width: 90%;
 }
 
 .form-group {
   margin-bottom: 10px;
+}
+
+div.form-group {
+  text-align: left;
 }
 
 .table {
@@ -140,4 +139,18 @@ form {
   padding: 0;
   vertical-align: top;
   border-top: none;
+}
+
+.actionbtn {
+  background: linear-gradient(#a969b5, #d27f3f);
+  color: white;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 10px;
+  border: none;
+  box-shadow: 1px 3px 0 rgba(189, 134, 178, 0.5);
+}
+.actionbtn:hover {
+  box-shadow: 2px 5px 0 rgba(180, 118, 168, 0.5);
 }/*# sourceMappingURL=style.css.map */

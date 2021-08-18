@@ -6,48 +6,44 @@
   let objArticle = JSON.parse(getArticle); //convert format of data stocked in local storage (format :javascript) and set a variable to use it
     
   document.addEventListener("DOMContentLoaded", function(event) { //DOM need to be loaded before the function
-      let selectedQuantity= 1;
       let totalPriceCart= 0;
       let i = 0;
       for (let article of objArticle){ 
         if(parseInt(article.price) > 0){
-          totalPriceCart += parseInt(article.price/100) * parseInt(selectedQuantity);
+          totalPriceCart += parseInt(article.price/100) * parseInt(article.selectedQuantity);
           }else{
           totalPriceCart += 0;
           }
+    
 
-    document.querySelector("table").innerHTML+=`<tbody>
-                                                    <tr class="card-panier row article-information bgprimary">
+    document.querySelector("tbody").innerHTML+=`     <tr class="card-panier row article-information bgprimary">
                                                         <td class="cart-column center col image-article">
                                                             <img class="productimage center card-img-top" src="${article.imageUrl}"/>
                                                         </td>
-                                                       
+                                                       <td class="cart-column center col color-article">
+                                                            <div class="productcolor">${article.selectedColor}</div>
+                                                        </td>
                                                         <td class="cart-column center col price-article">
                                                             <div class="productprice">${article.price/100}.00€</div>
                                                         </td>
                                                         <td class="cart-column center col quantitiy-article">
-                                                            <div class="productquantity">
-                                                                <button class="remove-one fas fa-minus-square"></button>
-                                                                <span class=quantity>${selectedQuantity}</span>
-                                                                <button class="add-one fas fa-plus-square"></button>
-                                                            </div>  
+                                                            <div class="productquantity">${article.selectedQuantity}</div>  
                                                         </td>
                                                         <td class="cart-column center col remove-button-article">
-                                                            <button type="reset" id="remove-btn" class="btn-danger btn">
+                                                            <button type="reset" onclick="deleteArticle(${i})" id="remove-btn" class="btn-danger btn">
                                                                &times         
                                                             </button>
                                                         </td>
-                                                    </tr>
-                                                </tbody>` 
+                                                    </tr>` 
                                                 i++;      
     }
 
     document.querySelector(".table").innerHTML+=`<div class="total-order-price bgsecondary">Prix total panier : ${totalPriceCart}.00€</div>`    
     })
     function deleteArticle(i){
-    let element = document.querySelector("tbody") 
+    let element = document.getElementsByClassName("article-information") 
     console.log(element)
-    document.querySelector("tr").removeChild(element[i]);
+    document.querySelector("tbody").removeChild(element[i]);
     objArticle.splice(i,1)
 
     localStorage.setItem("article", JSON.stringify(objArticle));
@@ -55,11 +51,10 @@
     
   console.log(objArticle[i])
 }
-
+   
     
-    
 
-/*verification des saisies de l'utilisateur dans le formulaire
+//user data check with RegExp
 let myForm = document.getElementById("orderform");
 
 let myRegExp= new RegExp('^[a-zA-Z-\s]+$','g');//les regexp ou expression régulière permettent de rechercher la présence de caractères dans une expression. ^:debut du texte,+:répetion du caractère plusieurs fois, {2,30}:nombre de caractères permis de 2 à 30 $:fin d'expression régulière,'g':marqueur globale \s:espage
@@ -101,7 +96,7 @@ myForm.addEventListener('submit',function(e){
       document.querySelector(".span-form-ville").innerHTML=errorText;
     
     e.preventDefault();//arrêt soumission
-    }*/
+  
 
 // creer un objet contact et mettre le formulaire dans locale storage
   let contact = {
@@ -117,14 +112,23 @@ myForm.addEventListener('submit',function(e){
   for (let p of articles){
     products.push(p._id) 
     }
-    
+
+
+
+function send(e) {
+  e.preventDefault();
+
+  let contact = {
+  firstName: surname.value,
+  lastName: familyname.value,  
+  address: address.value,
+  city: ville.value,
+  email: email.value,
+  };
 let dataToSend = {
 contact: contact,
 products: products
 };
-
-function send(e) {
-  e.preventDefault();
   fetch("http://localhost:3000/api/teddies/order", {
     method: "POST",
      body: JSON.stringify(dataToSend),
@@ -137,4 +141,5 @@ function send(e) {
 }
 document
   .getElementById("orderform")
-  .addEventListener("submit", send);//})
+  .addEventListener("submit", send) 
+  }})
