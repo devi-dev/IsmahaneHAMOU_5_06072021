@@ -142,7 +142,9 @@ div.form-group {
 }
 
 .actionbtn {
-  background: linear-gradient(#a969b5, #d27f3f);
+  text-align: center;
+  width: 60%;
+  background: linear-gradient(30deg, #d27f3f, #a969b5);
   color: white;
   border-radius: 10px;
   font-size: 1rem;

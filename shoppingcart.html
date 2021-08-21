@@ -98,10 +98,11 @@
             name="familyname"
             class="form-control"
             type="text"
+            maxlength="30"
             required
             placeholder="Ourson"
           />
-          <span class="span-form-name text-danger"></span>
+          <span class="span-form-name span-form text-danger"></span>
         </div>
         <div class="form-group">
           <label for="surname"> Prénom </label>
@@ -110,6 +111,7 @@
             name="surname"
             class="form-control"
             type="text"
+            maxlength="30"
             required
             placeholder="Teddy"
           />
@@ -126,6 +128,19 @@
             placeholder="teddy.ourson@gmail.com"
           />
           <span class="span-form-email text-danger"></span>
+        </div>
+        <div class="form-group">
+          <label for="numero"> Numéro de rue </label>
+          <input
+            id="numero"
+            name="numero"
+            class="form-control"
+            placeholder="10"
+            type="number"
+            pattern="[0-9]{0,4}"
+            required
+          />
+          <span class="span-form-numero text-danger"></span>
         </div>
         <div class="form-group">
           <label for="address"> Adresse </label>
@@ -147,6 +162,7 @@
             class="form-control"
             placeholder="75003"
             required
+            type="number"
             pattern="[0-9]{5}"
           />
           <span class="span-form-cp text-danger"></span>
@@ -158,19 +174,29 @@
             name="ville"
             class="form-control"
             placeholder="Paris"
+            maxlength="30"
             type="text"
             required
           />
           <span class="span-form-ville text-danger"></span>
         </div>
-        <input
-          type="submit"
-          id="btnOrder"
-          class="bloc-button action-btn btn btn-lg btn-block btn-order"
-          value="Commander"
-        />
+        <br />
+        <div class="text-center">
+          <input
+            type="submit"
+            id="btnOrder"
+            class="
+              bloc-button
+              action-btn
+              btn btn-lg btn-block btn-order
+              actionbtn
+              text-center
+            "
+            value="Commander"
+          />
+        </div>
+        <br />
       </form>
-      <div id="result"></div>
     </section>
 
     <footer class="navbar bgprimary">

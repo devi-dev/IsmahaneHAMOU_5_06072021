@@ -1,11 +1,11 @@
 //hydrate shoppingcart.html with article information
   
-  let getArticle = localStorage.getItem ("article"); //get data stocked in local storage (format:JSON) and set a variable to use it
-  let productNumbers = localStorage.getItem("cartNumbers");
+let getArticle = localStorage.getItem ("article"); //get data stocked in local storage (format:JSON) and set a variable to use it
+let productNumbers = localStorage.getItem("cartNumbers");
 
-  let objArticle = JSON.parse(getArticle); //convert format of data stocked in local storage (format :javascript) and set a variable to use it
-    
-  document.addEventListener("DOMContentLoaded", function(event) { //DOM need to be loaded before the function
+let objArticle = JSON.parse(getArticle); //convert format of data stocked in local storage (format :javascript) and set a variable to use it  
+  
+document.addEventListener("DOMContentLoaded", function(event) { //DOM need to be loaded before the function
       let totalPriceCart= 0;
       let i = 0;
       for (let article of objArticle){ 
@@ -15,8 +15,7 @@
           totalPriceCart += 0;
           }
     
-
-    document.querySelector("tbody").innerHTML+=`     <tr class="card-panier row article-information bgprimary">
+        document.querySelector("tbody").innerHTML+=`<tr class="card-panier row article-information bgprimary">
                                                         <td class="cart-column center col image-article">
                                                             <img class="productimage center card-img-top" src="${article.imageUrl}"/>
                                                         </td>
@@ -24,7 +23,7 @@
                                                             <div class="productcolor">${article.selectedColor}</div>
                                                         </td>
                                                         <td class="cart-column center col price-article">
-                                                            <div class="productprice">${article.price/100}.00€</div>
+                                                            <div class="productprice">${article.price/100}€</div>
                                                         </td>
                                                         <td class="cart-column center col quantitiy-article">
                                                             <div class="productquantity">${article.selectedQuantity}</div>  
@@ -35,85 +34,81 @@
                                                             </button>
                                                         </td>
                                                     </tr>` 
-                                                i++;      
+                                                    i++;      
     }
 
     document.querySelector(".table").innerHTML+=`<div class="total-order-price bgsecondary">Prix total panier : ${totalPriceCart}.00€</div>`    
-    })
-    function deleteArticle(i){
-    let element = document.getElementsByClassName("article-information") 
-    console.log(element)
-    document.querySelector("tbody").removeChild(element[i]);
-    objArticle.splice(i,1)
+  })
 
-    localStorage.setItem("article", JSON.stringify(objArticle));
-    location.reload()
+  function deleteArticle(i){
+  let element = document.getElementsByClassName("article-information") 
+  console.log(element)
+  document.querySelector("tbody").removeChild(element[i]);
+  objArticle.splice(i,1)
+
+  localStorage.setItem("article", JSON.stringify(objArticle));
+  location.reload()
     
   console.log(objArticle[i])
-}
-   
-    
+  }
 
-//user data check with RegExp
+ //user data validity check with RegEx
 let myForm = document.getElementById("orderform");
 
-let myRegExp= new RegExp('^[a-zA-Z-\s]+$','g');//les regexp ou expression régulière permettent de rechercher la présence de caractères dans une expression. ^:debut du texte,+:répetion du caractère plusieurs fois, {2,30}:nombre de caractères permis de 2 à 30 $:fin d'expression régulière,'g':marqueur globale \s:espage
-let myRegExpmail= new RegExp('^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$','g');
-let myRegExpaddress= new RegExp('^[a-z0-9-]+$','g');//les regexp ou expression régulière permettent de rechercher la présence de caractères dans une expression. ^:debut du texte,+:répetion du caractère plusieurs fois, {2,30}:nombre de caractères permis de 2 à 30 $:fin d'expression régulière,'g':marqueur globale \s:espage
-let myRegExpcp= new RegExp('^([A-Z]+[A-Z]?\-)?[0-9]{1,2} ?[0-9]{3}$','g');
+let myRegExName=/^([a-zA-Z]{1,}\s?[a-zA-Z]{1,}?-?)/;//les regexp ou expression régulière permettent de rechercher la présence de caractères dans une expression. ^:debut du texte,+:répetion du caractère plusieurs fois, {2,30}:nombre de caractères permis de 2 à 30 $:fin d'expression régulière,'g':marqueur globale \s:espage
+let myRegExmail=/^[a-z0-9.?_?-?]+@[a-z0-9.?_?-?]{2,}\.[a-z]{2,4}$/;
+let myRegExNumber=/^[0-9-?]{0,5}$/
+
 let familyName = document.getElementById("familyname");
 let surName = document.getElementById('surname');
 let email = document.getElementById('email');
+let streetNumber = document.getElementById('numero');
 let address = document.getElementById('address');
 let codePostal = document.getElementById('codepostal');
 let ville = document.getElementById('ville');
+
 let errorText="Saisie invalide";
 console.log(email.value)
 
-myForm.addEventListener('submit',function(e){
-  if (familyname.value.trim==""||myRegExp.test(familyName.value) == false) { //trim permet d'enlever les espaces avant et après la valeur
-  document.querySelector(".span-form-name").innerHTML=errorText;
-  e.preventDefault();//arrêt soumission
-  }
-   if (familyname.value.trim==""||myRegExp.test(surName.value) == false) { //trim permet d'enlever les espaces avant et après la valeur
-  document.querySelector(".span-form-surname").innerHTML=errorText;
-  e.preventDefault();//arrêt soumission
-  }
-   if (email.value.trim==""||myRegExpmail.test(email.value) == false) { //trim permet d'enlever les espaces avant et après la valeur
-    document.querySelector(".span-form-email").innerHTML=errorText;
-    e.preventDefault();//arrêt soumission
-  }
-    if (address.value.trim==""||myRegExpaddress.test(address.value) == false) { //trim permet d'enlever les espaces avant et après la valeur
-    document.querySelector(".span-form-address").innerHTML=errorText;
-    e.preventDefault();//arrêt soumission
-    }
-    if (codePostal.value.trim==""||myRegExpcp.test(codePostal.value) == false) { //trim permet d'enlever les espaces avant et après la valeur
-      document.querySelector(".span-form-cp").innerHTML=errorText;
-  
-    e.preventDefault();//arrêt soumission
-    }
-    if (ville.value.trim==""||myRegExp.test(ville.value) == false) { //trim permet d'enlever les espaces avant et après la valeur
-      document.querySelector(".span-form-ville").innerHTML=errorText;
-    
-    e.preventDefault();//arrêt soumission
-  
-
-// creer un objet contact et mettre le formulaire dans locale storage
-  let contact = {
-  firstName: surname.value,
-  lastName: familyname.value,  
-  address: address.value,
-  city: ville.value,
-  email: email.value,
-  };
-
+//réucpérer l'id des produits et les mettre dans un array
   let articles = JSON.parse(localStorage.getItem("article"))
   let products= [];
   for (let p of articles){
     products.push(p._id) 
     }
 
-
+myForm.addEventListener('submit',function(e){
+  if (familyName.value =="" || myRegExName.test(familyName.value) == false){
+    e.preventDefault();//arrêt soumission
+    document.querySelector(".span-form-name").innerHTML=errorText;
+     }else if (surName.value.lenght<2 || myRegExName.test(surName.value) == false) {
+        e.preventDefault();//arrêt soumission
+        document.querySelector(".span-form-surname").innerHTML=errorText;
+         }else if (streetNumber.value.lenght>5 || myRegExNumber.test(streetNumber.value) == false) {
+          e.preventDefault();//arrêt soumission
+          document.querySelector(".span-form-numero").innerHTML=errorText;
+          }else if (address.value.lenght<2 || myRegExName.test(address.value) == false) {
+          e.preventDefault();//arrêt soumission
+          document.querySelector(".span-form-address").innerHTML=errorText;
+          }else if (codePostal.value.lenght>5 || myRegExNumber.test(codePostal.value) == false) {
+            e.preventDefault();//arrêt soumission
+            document.querySelector(".span-form-cp").innerHTML=errorText;
+          }else if (ville.value.lenght<2 || myRegExName.test(ville.value) == false) {
+            e.preventDefault();//arrêt soumission
+            document.querySelector(".span-form-ville").innerHTML=errorText;
+            }else if (email.value =="" || myRegExmail.test(email.value) == false) {
+              e.preventDefault();//arrêt soumission
+              document.querySelector(".span-form-email").innerHTML=errorText;
+              }else{
+                document.querySelector(".span-form-name").innerHTML="<i class ='fas fa-check text-success'></i>";
+                document.querySelector(".span-form-surname").innerHTML="<i class ='fas fa-check text-success'></i>";
+                document.querySelector(".span-form-numero").innerHTML="<i class ='fas fa-check text-success'></i>";
+                document.querySelector(".span-form-address").innerHTML="<i class ='fas fa-check text-success'></i>";
+                document.querySelector(".span-form-cp").innerHTML="<i class ='fas fa-check text-success'></i>"
+                document.querySelector(".span-form-ville").innerHTML="<i class ='fas fa-check text-success'></i>";
+// si les données transmisent ne contiennent pas d'erreurs, les envoyer au serveur
+              send(e)
+              }
 
 function send(e) {
   e.preventDefault();
@@ -134,12 +129,15 @@ products: products
      body: JSON.stringify(dataToSend),
      headers: { 
       "Content-Type": "application/json",
-    },
-   
-  });
-  
-}
-document
-  .getElementById("orderform")
-  .addEventListener("submit", send) 
-  }})
+    }
+    })
+    .then(function(response) { 
+      if (response.ok){
+      return response.json()
+    }
+  })
+    .then(function (orderid) {  
+    console.log (orderid); 
+    })
+  .catch(console.error)
+}})

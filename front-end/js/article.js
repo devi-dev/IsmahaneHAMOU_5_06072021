@@ -20,7 +20,7 @@ fetch(`http://localhost:3000/api/teddies/${getParameters}`)
                                                             <img class="card-img-top article-img-top" src="${article.imageUrl}" alt="teddies" title=""/> 
                                                             <div class="card-header bgsecondary article-card-header ">
                                                                 <h2 class="card-title">${article.name}</h2>
-                                                                <div class="card-text price">${article.price/ 100}.00 €</div>
+                                                                <div class="card-text price">${article.price/ 100}€</div>
                                                             </div>
                                                             <div class="card-body">
                                                                 <label for="color-select">Choisissez la couleur de votre ours en peluche:</label> <br/>

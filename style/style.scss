@@ -131,7 +131,9 @@ div.form-group {
   border-top: none;
 }
 .actionbtn {
-  background: linear-gradient($secondarycolor, $terciarycolor);
+  text-align: center;
+  width: 60%;
+  background: linear-gradient(30deg, $terciarycolor, $secondarycolor);
   color: white;
   border-radius: 10px;
   font-size: 1rem;
