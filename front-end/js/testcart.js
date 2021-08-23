@@ -35,9 +35,10 @@ document.addEventListener("DOMContentLoaded", function(event) { //DOM need to be
                                                         </td>
                                                     </tr>` 
                                                     i++;      
-    }
+      }
 
     document.querySelector(".table").innerHTML+=`<div class="total-order-price bgsecondary">Prix total panier : ${totalPriceCart}.00€</div>`    
+   let storeCartPrice = localStorage.setItem("cartPrice",JSON.stringify(totalPriceCart));
   })
 
   function deleteArticle(i){
@@ -55,9 +56,9 @@ document.addEventListener("DOMContentLoaded", function(event) { //DOM need to be
  //user data validity check with RegEx
 let myForm = document.getElementById("orderform");
 
-let myRegExName=/^([a-zA-Z]{1,}\s?[a-zA-Z]{1,}?-?)/;//les regexp ou expression régulière permettent de rechercher la présence de caractères dans une expression. ^:debut du texte,+:répetion du caractère plusieurs fois, {2,30}:nombre de caractères permis de 2 à 30 $:fin d'expression régulière,'g':marqueur globale \s:espage
-let myRegExmail=/^[a-z0-9.?_?-?]+@[a-z0-9.?_?-?]{2,}\.[a-z]{2,4}$/;
-let myRegExNumber=/^[0-9-?]{0,5}$/
+let myRegExName=/^([a-zA-Z]{1,}\s?-?[a-zA-Z]{1,}?)$/;//les regexp ou expression régulière permettent de rechercher la présence de caractères dans une expression. ^:debut du texte,+:répetion du caractère plusieurs fois, {2,30}:nombre de caractères permis de 2 à 30 $:fin d'expression régulière,'g':marqueur globale \s:espage
+let myRegExmail=/^([a-z0-9.?_?-?]+@[a-z0-9.?_?-?]{2,}\.[a-z]{2,4})$/;
+let myRegExNumber=/^([0-9-?]{0,5})$/
 
 let familyName = document.getElementById("familyname");
 let surName = document.getElementById('surname');
@@ -78,37 +79,41 @@ console.log(email.value)
     }
 
 myForm.addEventListener('submit',function(e){
-  if (familyName.value =="" || myRegExName.test(familyName.value) == false){
+  if (articles == null || articles == undefined) {
+    e.preventDefault();//arrêt soumission
+    console.alert("Votre Panier est vide. Sélectionnez des articles pour transmettre une commande")
+  }else if (familyName.value =="" || myRegExName.test(familyName.value) == false){
     e.preventDefault();//arrêt soumission
     document.querySelector(".span-form-name").innerHTML=errorText;
      }else if (surName.value.lenght<2 || myRegExName.test(surName.value) == false) {
+        document.querySelector(".span-form-name").innerHTML="<i class ='fas fa-check text-success'></i>";
         e.preventDefault();//arrêt soumission
         document.querySelector(".span-form-surname").innerHTML=errorText;
          }else if (streetNumber.value.lenght>5 || myRegExNumber.test(streetNumber.value) == false) {
+          document.querySelector(".span-form-surname").innerHTML="<i class ='fas fa-check text-success'></i>";
           e.preventDefault();//arrêt soumission
           document.querySelector(".span-form-numero").innerHTML=errorText;
-          }else if (address.value.lenght<2 || myRegExName.test(address.value) == false) {
-          e.preventDefault();//arrêt soumission
-          document.querySelector(".span-form-address").innerHTML=errorText;
-          }else if (codePostal.value.lenght>5 || myRegExNumber.test(codePostal.value) == false) {
+          }else if (email.value =="" || myRegExmail.test(email.value) == false) {
+            document.querySelector(".span-form-numero").innerHTML="<i class ='fas fa-check text-success'></i>";
             e.preventDefault();//arrêt soumission
-            document.querySelector(".span-form-cp").innerHTML=errorText;
-          }else if (ville.value.lenght<2 || myRegExName.test(ville.value) == false) {
-            e.preventDefault();//arrêt soumission
-            document.querySelector(".span-form-ville").innerHTML=errorText;
-            }else if (email.value =="" || myRegExmail.test(email.value) == false) {
+            document.querySelector(".span-form-email").innerHTML=errorText;
+            }else if (address.value.lenght<2 || myRegExName.test(address.value) == false) {
+              document.querySelector(".span-form-email").innerHTML="<i class ='fas fa-check text-success'></i>";
               e.preventDefault();//arrêt soumission
-              document.querySelector(".span-form-email").innerHTML=errorText;
-              }else{
-                document.querySelector(".span-form-name").innerHTML="<i class ='fas fa-check text-success'></i>";
-                document.querySelector(".span-form-surname").innerHTML="<i class ='fas fa-check text-success'></i>";
-                document.querySelector(".span-form-numero").innerHTML="<i class ='fas fa-check text-success'></i>";
+              document.querySelector(".span-form-address").innerHTML=errorText;
+              }else if (codePostal.value.lenght>5 || myRegExNumber.test(codePostal.value) == false) {
                 document.querySelector(".span-form-address").innerHTML="<i class ='fas fa-check text-success'></i>";
-                document.querySelector(".span-form-cp").innerHTML="<i class ='fas fa-check text-success'></i>"
-                document.querySelector(".span-form-ville").innerHTML="<i class ='fas fa-check text-success'></i>";
-// si les données transmisent ne contiennent pas d'erreurs, les envoyer au serveur
-              send(e)
-              }
+                e.preventDefault();//arrêt soumission
+                document.querySelector(".span-form-cp").innerHTML=errorText;
+                }else if (ville.value.lenght<2 || myRegExName.test(ville.value) == false) {
+                  document.querySelector(".span-form-cp").innerHTML="<i class ='fas fa-check text-success'></i>"
+                  e.preventDefault();//arrêt soumission
+                  document.querySelector(".span-form-ville").innerHTML=errorText;
+                  }else{
+                    document.querySelector(".span-form-ville").innerHTML="<i class ='fas fa-check text-success'></i>"
+                  // si les données transmisent ne contiennent pas d'erreurs, les envoyer au serveur
+                    send(e)
+                  }
 
 function send(e) {
   e.preventDefault();
@@ -138,6 +143,8 @@ products: products
   })
     .then(function (orderid) {  
     console.log (orderid); 
+    window.location.href =`./orderconfirmation.html?${orderid.orderId}`
     })
+
   .catch(console.error)
 }})
