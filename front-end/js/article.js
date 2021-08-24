@@ -93,6 +93,7 @@ fetch(`http://localhost:3000/api/teddies/${getParameters}`)
         localStorage.setItem("article",JSON.stringify(panier));
       }
       console.log(selectedArticle);
+      
       let overlay = document.querySelector("#overlay")
       overlay.style.display = "block";
       document.querySelector("#btn-close-popup").addEventListener("click", closePopup);
