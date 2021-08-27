@@ -47,8 +47,8 @@ fetch(`http://localhost:3000/api/teddies/${getParameters}`)
                                                                         <p id="btn-close-popup" class="btn-close-popup">&times;</p> 
                                                                         <h3 class="popup-title">Votre article a été ajouté au panier</h3>
                                                                         <p class="popup-text">Que souhaitez vous faire?</p>
-                                                                        <button class="popup-btn-acceuil"><a href = index.html>Revenir à l'acceuil</a></button>
-                                                                        <button class="popup-btn-panier"><a href = shoppingcart.html>Voir le panier</a></button>
+                                                                        <button class="popup-btn-acceuil btn bgsecondary"><a href = index.html>Revenir à l'acceuil</a></button>
+                                                                        <button class="popup-btn-panier btn bgsecondary"><a href = shoppingcart.html>Voir le panier</a></button>
                                                                     </div>
                                                                 </div>                                                            
                                                             </div>
