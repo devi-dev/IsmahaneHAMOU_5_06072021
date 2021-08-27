@@ -1,6 +1,10 @@
 //hydrate shoppingcart.html with article information
-  
+   
 let getArticle = localStorage.getItem ("article"); //get data stocked in local storage (format:JSON) and set a variable to use it
+if (getArticle == undefined || getArticle == null){
+      alert("Votre Panier est vide. Sélectionnez des articles pour transmettre une commande")
+       window.history.back();
+}
 
 let objArticle = JSON.parse(getArticle); //convert format of data stocked in local storage (format :javascript) and set a variable to use it  
   
@@ -9,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function(event) { //DOM need to be
       let i = 0;
       for (let article of objArticle){ 
         if(parseInt(article.price) > 0){
-          totalPriceCart += parseInt(article.price/100) * parseInt(article.selectedQuantity);
+          totalPriceCart += parseInt(article.price/100) * parseInt(article.selectedQuantity);// For each article add the price*quantity to total price
           }else{
           totalPriceCart += 0;
           }
@@ -56,8 +60,8 @@ document.addEventListener("DOMContentLoaded", function(event) { //DOM need to be
 let myForm = document.getElementById("orderform");
 
 let myRegExName=/^([a-zA-Z]{1,}\s?-?[a-zA-Z]{1,}?)$/;//les regexp ou expression régulière permettent de rechercher la présence de caractères dans une expression. ^:debut du texte,+:répetion du caractère plusieurs fois, {2,30}:nombre de caractères permis de 2 à 30 $:fin d'expression régulière,'g':marqueur globale \s:espage
-let myRegExmail=/^([a-z0-9.?_?-?]+@[a-z0-9.?_?-?]{2,}\.[a-z]{2,4})$/;
-let myRegExNumber=/^([0-9-?]{0,5})$/
+let myRegExmail=/^([a-zA-Z0-9?.?_?-?]+@[a-zA-Z0-9?.?_?-?]{2,}\.[a-zA-Z]{2,4})$/;
+let myRegExNumber=/^([0-9]{0,5})$/
 
 let familyName = document.getElementById("familyname");
 let surName = document.getElementById('surname');
@@ -78,41 +82,62 @@ console.log(email.value)
     }
 
 myForm.addEventListener('submit',function(e){
-  if (articles == null || articles == undefined) {
+  if (products.length == 0) {
     e.preventDefault();//arrêt soumission
-    console.alert("Votre Panier est vide. Sélectionnez des articles pour transmettre une commande")
-  }else if (familyName.value =="" || myRegExName.test(familyName.value) == false){
+    alert("Votre Panier est vide. Sélectionnez des articles pour transmettre une commande")
+  }
+  if (familyName.value.length<2  || myRegExName.test(familyName.value) == false){
     e.preventDefault();//arrêt soumission
-    document.querySelector(".span-form-name").innerHTML=errorText;
-     }else if (surName.value.lenght<2 || myRegExName.test(surName.value) == false) {
-        document.querySelector(".span-form-name").innerHTML="<i class ='fas fa-check text-success'></i>";
+    document.querySelector(".span-form-name").textContent="Nom invalide";
+  }else if(familyName.value.length>1 && myRegExName.test(familyName.value) == true){
+  document.querySelector(".span-form-name").innerHTML="<i class ='fas fa-check text-success'></i>";
+  }
+
+  if (surName.value.length<2 || myRegExName.test(surName.value) == false) {
+    e.preventDefault();//arrêt soumission
+    document.querySelector(".span-form-surname").innerHTML=errorText;
+  }else if(surName.value.length>1 && myRegExName.test(surName.value) == true){
+  document.querySelector(".span-form-surname").innerHTML="<i class ='fas fa-check text-success'></i>";
+  }
+
+   if (email.value =="" || myRegExmail.test(email.value) == false) {
+    e.preventDefault();//arrêt soumission
+    document.querySelector(".span-form-email").innerHTML=errorText;
+  }else if(email.value !=="" && myRegExmail.test(email.value) == true){
+  document.querySelector(".span-form-email").innerHTML="<i class ='fas fa-check text-success'></i>";
+  }
+
+   if (streetNumber.value.length>5 || myRegExNumber.test(streetNumber.value) == false) {
+    e.preventDefault();//arrêt soumission
+    document.querySelector(".span-form-numero").innerHTML=errorText;
+  }else if(streetNumber.value.length<6 && myRegExNumber.test(streetNumber.value) == true){
+  document.querySelector(".span-form-numero").innerHTML="<i class ='fas fa-check text-success'></i>";
+  }
+
+  if (address.value.length<2 || myRegExName.test(address.value) == false) {
         e.preventDefault();//arrêt soumission
-        document.querySelector(".span-form-surname").innerHTML=errorText;
-         }else if (streetNumber.value.lenght>5 || myRegExNumber.test(streetNumber.value) == false) {
-          document.querySelector(".span-form-surname").innerHTML="<i class ='fas fa-check text-success'></i>";
-          e.preventDefault();//arrêt soumission
-          document.querySelector(".span-form-numero").innerHTML=errorText;
-          }else if (email.value =="" || myRegExmail.test(email.value) == false) {
-            document.querySelector(".span-form-numero").innerHTML="<i class ='fas fa-check text-success'></i>";
-            e.preventDefault();//arrêt soumission
-            document.querySelector(".span-form-email").innerHTML=errorText;
-            }else if (address.value.lenght<2 || myRegExName.test(address.value) == false) {
-              document.querySelector(".span-form-email").innerHTML="<i class ='fas fa-check text-success'></i>";
-              e.preventDefault();//arrêt soumission
-              document.querySelector(".span-form-address").innerHTML=errorText;
-              }else if (codePostal.value.lenght>5 || myRegExNumber.test(codePostal.value) == false) {
-                document.querySelector(".span-form-address").innerHTML="<i class ='fas fa-check text-success'></i>";
-                e.preventDefault();//arrêt soumission
-                document.querySelector(".span-form-cp").innerHTML=errorText;
-                }else if (ville.value.lenght<2 || myRegExName.test(ville.value) == false) {
-                  document.querySelector(".span-form-cp").innerHTML="<i class ='fas fa-check text-success'></i>"
-                  e.preventDefault();//arrêt soumission
-                  document.querySelector(".span-form-ville").innerHTML=errorText;
-                  }else{
-                    document.querySelector(".span-form-ville").innerHTML="<i class ='fas fa-check text-success'></i>"
-                  // si les données transmisent ne contiennent pas d'erreurs, les envoyer au serveur
-                    send(e)
-                  }
+        document.querySelector(".span-form-address").innerHTML=errorText;
+  }else if(address.value.length>1 && myRegExName.test(address.value) == true){
+  document.querySelector(".span-form-address").innerHTML="<i class ='fas fa-check text-success'></i>";
+  }
+
+  if (codePostal.value.length>5 || myRegExNumber.test(codePostal.value) == false){
+        e.preventDefault();//arrêt soumission
+        document.querySelector(".span-form-cp").innerHTML=errorText;
+  }else if(codePostal.value.length<6 && myRegExNumber.test(codePostal.value) == true){
+  document.querySelector(".span-form-cp").innerHTML="<i class ='fas fa-check text-success'></i>";
+  }
+
+  if (ville.value.length<2 || myRegExName.test(ville.value) == false) {
+        e.preventDefault();//arrêt soumission
+        document.querySelector(".span-form-ville").innerHTML=errorText;
+  }else if(ville.value.length>1 && myRegExName.test(ville.value) == true){
+  document.querySelector(".span-form-ville").innerHTML="<i class ='fas fa-check text-success'></i>";     
+ 
+  }if(familyName.value.length>1 && myRegExName.test(familyName.value) == true && surName.value.length>1 && myRegExName.test(surName.value) == true && email.value !=="" && myRegExmail.test(email.value) == true && streetNumber.value.length<6 && myRegExNumber.test(streetNumber.value) == true && address.value.length>1 && myRegExName.test(address.value) == true && codePostal.value.length<6 && myRegExNumber.test(codePostal.value) == true && ville.value.length>1 && myRegExName.test(ville.value) == true){
+   // si les données transmisent ne contiennent pas d'erreurs, les envoyer au serveur
+   send(e)
+  }
 
 function send(e) {
   e.preventDefault();

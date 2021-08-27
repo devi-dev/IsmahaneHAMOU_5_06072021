@@ -16,7 +16,7 @@ fetch(`http://localhost:3000/api/teddies/${getParameters}`)
        selectedArticle = article;
 
 //hydrate html with article informations
-        document.querySelector(".container").innerHTML +=  `<div class="card bgprimary article-card">
+        document.querySelector(".container").innerHTML +=  `<div class="card bgprimary article-card style="width:25rem">
                                                             <img class="card-img-top article-img-top" src="${article.imageUrl}" alt="teddies" title=""/> 
                                                             <div class="card-header bgsecondary article-card-header ">
                                                                 <h2 class="card-title">${article.name}</h2>

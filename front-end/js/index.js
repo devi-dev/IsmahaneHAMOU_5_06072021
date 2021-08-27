@@ -12,7 +12,7 @@ fetch("http://localhost:3000/api/teddies")
 
     //Hydrate page with the list of articles
     for (let article of listOfProducts) {
-      document.querySelector(".listofarticles").innerHTML +=`<div class="card bgprimary">
+      document.querySelector(".listofarticles").innerHTML +=`<div class="card-index card bgprimary">
                                                               <a href=./article.html?${article._id}>
                                                                 <img class="card-img-top" src="${article.imageUrl}" alt="teddies" title=""/>
                                                                 <div class="card-header bgsecondary">
