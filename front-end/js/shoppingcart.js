@@ -165,9 +165,9 @@ products: products
       return response.json()
     }
   })
-    .then(function (orderId) {  
-    console.log (orderId); 
-    window.location.href =`./orderconfirmation.html?${orderid.orderId}`
+    .then(function (order) {  
+    console.log (order); 
+    window.location.href =`./orderconfirmation.html?${order.orderId}`
     })
 
   .catch(console.error)
