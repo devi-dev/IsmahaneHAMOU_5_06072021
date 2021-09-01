@@ -2,25 +2,25 @@
    
 let getArticle = localStorage.getItem ("article"); //get data stocked in local storage (format:JSON) and set a variable to use it
 if (getArticle == undefined || getArticle == null){
-      alert("Votre Panier est vide. Sélectionnez des articles pour transmettre une commande")
-       window.history.back();
+  alert("Votre Panier est vide. Sélectionnez des articles pour transmettre une commande")
+  window.history.back();
 }
 
 let objArticle = JSON.parse(getArticle); //convert format of data stocked in local storage (format :javascript) and set a variable to use it  
   
 document.addEventListener("DOMContentLoaded", function(event) { //DOM need to be loaded before the function
-      let totalPriceCart= 0;
-      let i = 0;
-      for (let article of objArticle){ 
-        if(parseInt(article.price) > 0){
-          totalPriceCart += parseInt(article.price/100) * parseInt(article.selectedQuantity);// For each article add the price*quantity to total price
-          }else{
-          totalPriceCart += 0;
-          }
-    
+  let totalPriceCart= 0;
+  let i = 0;
+  for (let article of objArticle){ 
+    if(parseInt(article.price) > 0){
+      totalPriceCart += parseInt(article.price/100) * parseInt(article.selectedQuantity);// For each article add the price*quantity to total price
+    }else{
+      totalPriceCart += 0;
+    }
+    //hydrate page
         document.querySelector("tbody").innerHTML+=`<tr class="card-panier row article-information bgprimary">
                                                         <td class="cart-column center col image-article">
-                                                            <img class="productimage center card-img-top" src="${article.imageUrl}"/>
+                                                            <img class="productimage center card-img-top img-fluid img-thumbnail" style= "width:100%;height:auto" src="${article.imageUrl}"/>
                                                         </td>
                                                        <td class="cart-column center col color-article">
                                                             <div class="productcolor">${article.selectedColor}</div>
@@ -41,20 +41,18 @@ document.addEventListener("DOMContentLoaded", function(event) { //DOM need to be
       }
 
     document.querySelector(".table").innerHTML+=`<div class="total-order-price bgsecondary">Prix total panier : ${totalPriceCart}.00€</div>`    
-   let storeCartPrice = localStorage.setItem("cartPrice",JSON.stringify(totalPriceCart));
-  })
+    let storeCartPrice = localStorage.setItem("cartPrice",JSON.stringify(totalPriceCart));
+})
 
-  function deleteArticle(i){
+function deleteArticle(i){
   let element = document.getElementsByClassName("article-information") 
   console.log(element)
   document.querySelector("tbody").removeChild(element[i]);
   objArticle.splice(i,1)
-
-  localStorage.setItem("article", JSON.stringify(objArticle));
+  localStorage.setItem("article", JSON.stringify(objArticle))
   location.reload()
-    
   console.log(objArticle[i])
-  }
+}
 
  //user data validity check with RegEx
 let myForm = document.getElementById("orderform");
@@ -75,11 +73,11 @@ let errorText="Saisie invalide";
 console.log(email.value)
 
 //réucpérer l'id des produits et les mettre dans un array
-  let articles = JSON.parse(localStorage.getItem("article"))
-  let products= [];
-  for (let p of articles){
-    products.push(p._id) 
-    }
+let articles = JSON.parse(localStorage.getItem("article"))
+let products= [];
+for (let p of articles){
+  products.push(p._id) 
+}
 
 myForm.addEventListener('submit',function(e){
   if (products.length == 0) {
@@ -149,26 +147,27 @@ function send(e) {
   city: ville.value,
   email: email.value,
   };
-let dataToSend = {
-contact: contact,
-products: products
-};
+  let dataToSend = {
+  contact: contact,
+  products: products
+  }
+
   fetch("http://localhost:3000/api/teddies/order", {
     method: "POST",
      body: JSON.stringify(dataToSend),
      headers: { 
       "Content-Type": "application/json",
     }
-    })
-    .then(function(response) { 
-      if (response.ok){
+  })
+  .then(function(response) { 
+    if (response.ok){
       return response.json()
     }
   })
-    .then(function (order) {  
+  .then(function (order) {  
     console.log (order); 
     window.location.href =`./orderconfirmation.html?${order.orderId}`
-    })
+  })
 
   .catch(console.error)
 }})

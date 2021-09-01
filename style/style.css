@@ -1,4 +1,8 @@
 /*mise en forme Accueil*/
+* {
+  font-family: Poppins, Arial, Helvetica, sans-serif;
+}
+
 .bgprimary {
   background-color: #f3e9f1;
 }
@@ -21,7 +25,8 @@
 }
 
 h1 {
-  font-size: 2.2rem;
+  font-size: 2.5rem;
+  font-family: Architects Daughter, Arial, Helvetica, sans-serif;
   font-weight: bold;
   background: rgba(169, 105, 181, 0.95);
   color: white;
@@ -32,6 +37,7 @@ h1 {
 
 h2 {
   font-size: 1.8 rem;
+  font-family: Pacifico, Arial, Helvetica, sans-serif;
 }
 
 a {

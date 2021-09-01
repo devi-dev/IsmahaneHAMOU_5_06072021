@@ -15,9 +15,9 @@ fetch(`http://localhost:3000/api/teddies/${getParameters}`)
        console.log (article);
        selectedArticle = article;
 
-//hydrate html with article informations
+        //hydrate html with article informations
         document.querySelector(".container").innerHTML +=  `<div class="card bgprimary article-card style="width:25rem">
-                                                            <img class="card-img-top article-img-top" src="${article.imageUrl}" alt="teddies" title=""/> 
+                                                            <img class="card-img-top article-img-top img-fluid" style= "width:100%;height:auto" src="${article.imageUrl}" alt="teddies" title=""/> 
                                                             <div class="card-header bgsecondary article-card-header ">
                                                                 <h2 class="card-title">${article.name}</h2>
                                                                 <div class="card-text price">${article.price/ 100}€</div>
@@ -56,47 +56,48 @@ fetch(`http://localhost:3000/api/teddies/${getParameters}`)
                                                         
       
  
-  // get color and quantity selected, if undefined set a default value
- 
-  function showcolor(){
-        let getColorSelected = document.querySelector("#colors-selection").value; //get color selected value
-        console.log(getColorSelected)
-         if(getColorSelected == null || getColorSelected == undefined){ //set default value if user didn't choose the color
-           return selectedArticle[0]
-          } else {
+    // get color selected if undefined set a default value
+    function showcolor(){
+      let getColorSelected = document.querySelector("#colors-selection").value; //get color selected value
+      console.log(getColorSelected)
+      if(getColorSelected == null || getColorSelected == undefined){ //set default value if user don't choose the color
+        return selectedArticle[0]
+      } else {
         selectedArticle["selectedColor"]=getColorSelected;
         console.log(selectedArticle)
-         }}         
-    
-  function showquantity(){
-        let getQuantitySelected = document.querySelector("#quantity-selection").value;
-        console.log(getQuantitySelected)
-        if(getQuantitySelected == null || getQuantitySelected == undefined){
-           return getQuantitySelected = 1
-        } else {  
-        selectedArticle["selectedQuantity"]=getQuantitySelected;
+      }
+    }         
+    // get quantity selected if undefined set a default value  
+    function showquantity(){
+      let getQuantitySelected = document.querySelector("#quantity-selection").value;
+      console.log(getQuantitySelected)
+      if(getQuantitySelected == null || getQuantitySelected == undefined){//set default value if user don't choose the quantity
+        return getQuantitySelected = 1
+      } else {  
+        selectedArticle["selectedQuantity"]=getQuantitySelected;//return quantity selected from object article
         console.log(selectedArticle)
-         }}
-         
-    const btnAddCart = document.getElementById("add-cart-btn");
-   
+      }
+    }
+          
+    const btnAddCart = document.getElementById("add-cart-btn");//btn "ajouter au panier"
+   //add event listener onclick :
     btnAddCart.addEventListener("click",function(){
-      let getArticle = JSON.parse(localStorage.getItem ("article"));
-      showcolor()
-      showquantity()    
-      if (getArticle != null && getArticle != undefined){
+      let getArticle = JSON.parse(localStorage.getItem("article"));//create a variable getArticle which get article info from localestorage and we need to parse it because localestorage data are in JSON so to convert it to javascript we use JSON.parse
+      showcolor()//get color selected
+      showquantity() //get quantity selected   
+      if (getArticle != null && getArticle != undefined){//if locale storage is not empty, add the selected article to existing article in localestorage 
       getArticle.push(selectedArticle)
-      localStorage.setItem("article",JSON.stringify(getArticle)); //collect selected items and stock them in the locale.storage
-      }else{
+      localStorage.setItem("article",JSON.stringify(getArticle)); //create localestorage and convert getArticle data in JSON before stock selected items 
+      }else{ // if locale storage is empty, set an array called panier and add to this array the selected article before stocking data in localestorage
         let panier = [];
         panier.push(selectedArticle)
         localStorage.setItem("article",JSON.stringify(panier));
       }
       console.log(selectedArticle);
       
-      let overlay = document.querySelector("#overlay")
+      let overlay = document.querySelector("#overlay")//show popup when user click on cart btn
       overlay.style.display = "block";
-      document.querySelector("#btn-close-popup").addEventListener("click", closePopup);
+      document.querySelector("#btn-close-popup").addEventListener("click", closePopup);//close popup cross btn user click on cart btn
     }); 
     function closePopup(){
       overlay.style.display = "none";
